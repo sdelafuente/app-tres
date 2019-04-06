@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>bienvenido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ul>
+    <li *ngFor="let item of items | async">
+      <h2> Mi nombre es {{item.nombre}}  y  mi apellido es: {{item.apellido}}</h2>
+    </li>
+  </ul>
+</ion-content>
