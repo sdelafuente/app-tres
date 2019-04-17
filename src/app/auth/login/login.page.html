@@ -1,4 +1,8 @@
 <ion-content color="light" padding>
+  <div class="" *ngIf="loading">
+      <ion-spinner name="circles"></ion-spinner>
+  </div>
+  <div class="" *ngIf="!loading" >
   <form #form="ngForm" (ngSubmit)="login()">
     <ion-grid>
       <ion-row color="light" justify-content-center>
@@ -20,4 +24,5 @@
       </ion-row>
     </ion-grid>
   </form>
+    </div>
 </ion-content>
