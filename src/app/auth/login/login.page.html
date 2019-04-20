@@ -9,20 +9,31 @@
         <ion-col align-self-center size-md="8" size-lg="8" size-xs="12">
           <div padding>
             <ion-item>
-              <!-- <ion-label position="stacked">E-mail</ion-label> -->
               <ion-input class="custom-input" placeholder="Correo" name="email" type="email" [(ngModel)]="email" required></ion-input>
             </ion-item>
             <ion-item>
-              <!-- <ion-label position="stacked">Password</ion-label> -->
               <ion-input class="custom-input" placeholder="Contraseña" name="password" type="password" [(ngModel)]="password" required></ion-input>
             </ion-item>
           </div>
+
           <div padding>
             <ion-button strong="true" color="light" shape="round" type="submit" [disabled]="form.invalid" expand="full">Ingresar</ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
-    </div>
+
+
+            <div  align="bottom">
+              <ion-button (click)="cargarUsuario('admin');" color="dark" expand="full" shape="round" fill="outline" type="button" >Admin</ion-button>
+            </div>
+            <div  align="bottom">
+              <ion-button (click)="cargarUsuario('invitado');" color="dark" expand="full" shape="round" fill="outline" type="button" >Invitado</ion-button>
+            </div>
+            <div  align="bottom">
+              <ion-button (click)="cargarUsuario('usuario');" color="dark" expand="full" shape="round" fill="outline" type="button" >Usuario</ion-button>
+            </div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
 </ion-content>

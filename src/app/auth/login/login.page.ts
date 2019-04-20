@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = false;
   }
 
   async login() {
@@ -33,6 +34,7 @@ export class LoginPage implements OnInit {
       const response = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
       // console.log(response);
       if (response.user) {
+        this.loading = false;
         this.router.navigateByUrl('bienvenido');
       }
 
@@ -45,5 +47,36 @@ export class LoginPage implements OnInit {
         // }
     }
   }
+
+
+
+  cargarUsuario(user) {
+    switch (user) {
+       case 'admin': {
+          this.email = 'admin@gmail.com';
+          this.password = '111111';
+          break;
+       }
+       case 'invitado': {
+         this.email = 'invitado@gmail.com';
+         this.password = '222222';
+          break;
+       }
+       case 'usuario': {
+         this.email = 'usuario@gmail.com';
+         this.password = '333333';
+          break;
+       }
+       case 'D': {
+          console.log('Poor');
+          break;
+       }
+       default: {
+          console.log('Invalid choice');
+          break;
+       }
+    }
+  }
+
 
 }
