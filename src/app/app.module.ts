@@ -15,7 +15,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-
+import { Gyroscope } from '@ionic-native/gyroscope/ngx';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,7 +33,9 @@ import { environment } from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Gyroscope,
+    DeviceMotion
   ],
   bootstrap: [AppComponent]
 })
