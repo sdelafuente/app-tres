@@ -15,8 +15,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
+
 import { Gyroscope } from '@ionic-native/gyroscope/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -35,7 +40,10 @@ import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Gyroscope,
-    DeviceMotion
+    DeviceMotion,
+    Flashlight,
+    Vibration,
+    NativeAudio
   ],
   bootstrap: [AppComponent]
 })

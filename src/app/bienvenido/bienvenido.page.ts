@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
+import { Vibration } from '@ionic-native/vibration/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'app-bienvenido',
@@ -13,17 +16,19 @@ import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device
 export class BienvenidoPage implements OnInit {
 
   items: Observable<any[]>;
-  public xOrient: any;
-  public yOrient: any;
-  public zOrient: any;
-  public timestamp: any;
+
   public accX: any;
   public accY: any;
   public accZ: any;
+  public gyrX: any;
+  public gyrY: any;
+  public gyrZ: any;
   public promise: any;
+  public promiseDos: any;
   public isVertial: any;
   public isHorizontal: any;
-  // public id: any;
+  public isLeft: any;
+  public isRight: any;
 
   private options: GyroscopeOptions = {
     frequency: 1000
@@ -32,53 +37,50 @@ export class BienvenidoPage implements OnInit {
   constructor(
     db: AngularFirestore,
     private gyroscope: Gyroscope,
-    private deviceMotion: DeviceMotion
-  ) {
-    // this.items = db.collection('santiago').valueChanges();
-
-  }
+    private deviceMotion: DeviceMotion,
+    private flashlight: Flashlight,
+    private vibration: Vibration,
+    private nativeAudio: NativeAudio
+  ) { }
 
   ngOnInit() {
-    // this.gyrascope();
+    this.isVertial = false;
+    this.isHorizontal = false;
+    this.isLeft = false;
+    this.isRight = false;
+    this.nativeAudio.preloadSimple('air-horn', 'assets/sounds/air-horn.wav');
+    this.nativeAudio.preloadSimple('bike', 'assets/sounds/bike-horn.wav');
+    this.nativeAudio.preloadSimple('sirena', 'assets/sounds/sirena.wav');
+    this.nativeAudio.preloadSimple('train', 'assets/sounds/train-low-horn.wav');
   }
 
+  // Giroscopio
   gyrascope() {
 
     this.gyroscope = new Gyroscope();
 
+    this.gyroscope.getCurrent()
+     .then((orientation: GyroscopeOrientation) => {
 
-   // this.gyroscope.getCurrent()
-   //   .then((orientation: GyroscopeOrientation) => {
-   //      // console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
-   //      this.xOrient = (orientation.x.toFixed(2));
-   //      this.yOrient = orientation.y;
-   //      this.zOrient = orientation.z;
-   //
-   //      this.timestamp = orientation.timestamp;
-   //
-   //    })
-   //   .catch()
+      })
+     .catch();
 
 
-    this.gyroscope.watch(this.options)
+    this.promiseDos = this.gyroscope.watch(this.options)
       .subscribe((orientation: GyroscopeOrientation) => {
-         // console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
-         this.xOrient = orientation.x;
-         this.yOrient = orientation.y;
-         this.zOrient = orientation.z;
-         this.timestamp = orientation.timestamp;
-          // = orientation.id;
+        this.gyrX = orientation.x;
+        this.gyrY = orientation.y;
+        this.gyrZ = orientation.z;
       });
   }
 
-  Accelerometer(valor) {
-    if (valor) {
+  // Acelerometro
+  Accelerometer() {
+
       this.deviceMotion.getCurrentAcceleration().then(
         (acceleration: DeviceMotionAccelerationData) =>
-         console.log(acceleration),
-
-      //  (error: any) => console.log(error)
-
+         // console.log(acceleration),
+        (error: any) => console.log(error)
       );
 
       // Watch device acceleration
@@ -89,26 +91,44 @@ export class BienvenidoPage implements OnInit {
         this.accY = acceleration.y;
         this.accZ = acceleration.z;
 
-        if (acceleration.y > 8 && acceleration.z  < 2 && !this.isVertial) {
+        // // Izquierda
+        // if ( acceleration.x > 2 && !this.isLeft) {
+        //   this.isLeft = true;
+        //   this.nativeAudio.play('sirena');
+        // }
+        //
+        // // Derecha
+        // if ( acceleration.x < -1 && !this.isRight) {
+        //   this.isRight = true;
+        //   this.nativeAudio.play('train');
+        // }
+
+        // Vertical
+        if (acceleration.y > 8 && acceleration.z  < 2 && !this.isVertial && this.flashlight.available()) {
           this.isVertial = true;
-          alert('Vertical');
+          this.flashlight.switchOn();
+          this.nativeAudio.play('air-horn');
+          setTimeout(() => this.flashlight.switchOff(), 5000);
         }
 
+        // Horizontal
         if (acceleration.y < 2 && acceleration.z  > 8 && !this.isHorizontal) {
           this.isHorizontal = true;
-          alert('Horizontal');
+          this.vibration.vibrate(5000);
+          this.nativeAudio.play('bike');
         }
 
       });
-      console.log(  this.promise);
-    } else {
-      this.promise.unsubscribe();
-    }
+  }
 
-
+  Stop() {
+    this.promise.unsubscribe();
+    this.promiseDos.unsubscribe();
   }
 
   Clear() {
+    this.isLeft = false;
+    this.isRight = false;
     this.isVertial = false;
     this.isHorizontal = false;
   }

@@ -10,6 +10,7 @@ import { BienvenidoPage } from './bienvenido.page';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+
 const routes: Routes = [
   {
     path: '',

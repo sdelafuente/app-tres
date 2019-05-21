@@ -5,29 +5,21 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-item>
-      <ion-label>X orientation</ion-label>
-    <ion-input type="text" [(ngModel)]="xOrient"></ion-input>
+  <ion-item>
+    <ion-label>X orientation</ion-label>
+    <ion-input type="text" [(ngModel)]="gyrX"></ion-input>
   </ion-item>
   <ion-item>
-      <ion-label>Y orientation</ion-label>
-      <ion-input type="text" [(ngModel)]="yOrient"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label>Z orientation</ion-label>
-        <ion-input type="text" [(ngModel)]="zOrient"></ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-label>Time Stamp</ion-label>
-          <ion-input type="text" [(ngModel)]="timestamp"></ion-input>
-        </ion-item>
-
-        <div  align="bottom">
-          <ion-button (click)="gyrascope()" color="dark" expand="full" shape="round" fill="outline" type="button" >click</ion-button>
-        </div>
-        <div  align="bottom">
-          <ion-button (click)="StopGyro()" color="dark" expand="full" shape="round" fill="outline" type="button" >stop</ion-button>
-        </div> -->
+    <ion-label>Y orientation</ion-label>
+    <ion-input type="text" [(ngModel)]="gyrY"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Z orientation</ion-label>
+    <ion-input type="text" [(ngModel)]="gyrZ"></ion-input>
+  </ion-item>
+  <div  align="bottom">
+    <ion-button (click)="gyrascope()" color="dark" expand="full" shape="round" fill="outline" type="button" >click</ion-button>
+  </div>
 
   <ion-item>
     <ion-label>Acceleration X</ion-label>
@@ -42,9 +34,12 @@
     <ion-input type="text" [(ngModel)]="accZ"></ion-input>
   </ion-item>
   <div  align="bottom">
-    <ion-button (click)="Accelerometer(true)" color="dark" expand="full" shape="round" type="button" >Acelerometro</ion-button>
+    <ion-button (click)="Accelerometer()" color="dark" expand="full" shape="round" fill="outline" type="button" >Iniciar</ion-button>
   </div>
   <div  align="bottom">
-    <ion-button (click)="Accelerometer(false)" color="dark" expand="full" shape="round" fill="outline" type="button" >stop</ion-button>
+    <ion-button (click)="Stop()" color="dark" expand="full" shape="round" fill="outline" type="button" >Detener</ion-button>
+  </div>
+  <div  align="bottom">
+    <ion-button (click)="Clear()" color="dark" expand="full" shape="round" fill="outline" type="button" >Limpiar</ion-button>
   </div>
 </ion-content>
