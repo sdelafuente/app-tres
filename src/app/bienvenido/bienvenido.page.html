@@ -1,27 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>bienvenido</ion-title>
+    <ion-title>Control de Movimiento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>X orientation</ion-label>
-    <ion-input type="text" [(ngModel)]="gyrX"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Y orientation</ion-label>
-    <ion-input type="text" [(ngModel)]="gyrY"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Z orientation</ion-label>
-    <ion-input type="text" [(ngModel)]="gyrZ"></ion-input>
-  </ion-item>
-  <div  align="bottom">
-    <ion-button (click)="gyrascope()" color="dark" expand="full" shape="round" fill="outline" type="button" >click</ion-button>
-  </div>
+    <!-- <ion-item>
+      <ion-label>X orientation</ion-label>
+      <ion-input type="text" [(ngModel)]="gyrX"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Y orientation</ion-label>
+      <ion-input type="text" [(ngModel)]="gyrY"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Z orientation</ion-label>
+      <ion-input type="text" [(ngModel)]="gyrZ"></ion-input>
+    </ion-item>
+    <div  align="bottom">
+      <ion-button (click)="gyrascope()" color="dark" expand="full" shape="round" fill="outline" type="button" >click</ion-button>
+    </div> -->
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label>Acceleration X</ion-label>
     <ion-input type="text" [(ngModel)]="accX"></ion-input>
   </ion-item>
@@ -32,8 +37,9 @@
   <ion-item>
     <ion-label>Acceleration Z</ion-label>
     <ion-input type="text" [(ngModel)]="accZ"></ion-input>
-  </ion-item>
-  <div  align="bottom">
+  </ion-item> -->
+
+  <!-- <div  align="bottom">
     <ion-button (click)="Accelerometer()" color="dark" expand="full" shape="round" fill="outline" type="button" >Iniciar</ion-button>
   </div>
   <div  align="bottom">
@@ -41,5 +47,15 @@
   </div>
   <div  align="bottom">
     <ion-button (click)="Clear()" color="dark" expand="full" shape="round" fill="outline" type="button" >Limpiar</ion-button>
+  </div> -->
+  <div  align="bottom" class="contenedor" >
+    <ion-button *ngIf="!isOn" (click)="Iniciar()" color="dark" type="button" >
+        <!-- <ion-icon name="power"></ion-icon> -->
+        <ion-icon name="radio-button-off"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="isOn" (click)="Detener()" color="danger" type="button" >
+      <!-- <ion-icon name="power"></ion-icon> -->
+      <ion-icon name="radio-button-on"></ion-icon>
+    </ion-button>
   </div>
 </ion-content>

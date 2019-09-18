@@ -3,26 +3,51 @@
 //     --color: #080808;
 //     --margin-top:5px;
 // }
-.item {
-    padding: 0 !important;
-    margin-bottom: 8px;
+// .item {
+//     padding: 0 !important;
+//     margin-bottom: 8px;
+// }
+//
+// ion-grid {
+//     --font-family: 'Lato-Light';
+//     // src: url('../fonts/Lato-Light.eot') format('embedded-opentype'), url('../fonts/Lato-Light.woff') format('woff'), url('../fonts/Lato-Light.ttf') format('truetype');
+//     --font-weight: normal;
+//     --font-style: normal;
+// }
+//
+// ion-input {
+//   &.custom-input {
+//     font-size: 1em; //sets text font size
+//     ::placeholder {
+//       font-size: 0.8em; //sets placeholder font size
+//     }
+//   }
+// }
+
+ion-list {
+  margin-bottom: 5%;
 }
 
-ion-grid {
-    --font-family: 'Lato-Light';
-    // src: url('../fonts/Lato-Light.eot') format('embedded-opentype'), url('../fonts/Lato-Light.woff') format('woff'), url('../fonts/Lato-Light.ttf') format('truetype');
-    --font-weight: normal;
-    --font-style: normal;
+form {
+  padding: 4%;
+   text-align: center;
 }
 
-ion-input {
-  &.custom-input {
-    font-size: 1em; //sets text font size
-    ::placeholder {
-      font-size: 0.8em; //sets placeholder font size
-    }
-  }
+ion-content {
+  margin: 0 auto;
+  width: 100%;
 }
+
+
+// .red-square {
+//   // background-color: #FF4136;
+//   width: 400px;
+//   // height: 300px;
+//   position: absolute;
+//   left: 50%;
+//   top: 30%;
+//   transform: translate(-50%, -50%);
+// }
 
 ion-spinner {
   stroke: #ff0000;
@@ -48,11 +73,16 @@ ion-spinner {
   left: 0;
   z-index: 100000;
   width:100%;
-  background-color: #002a3e;
+  // background-color: #002a3e;
+  background-image: url('/assets/alarma.splash.sin.icono.png');
+  // height: 500px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
 }
 
 .flb {
-  background-color: #8d6e63;
+  // background-color: #8d6e63;
   height:100%;
   width:100%;
   animation: pulse 1s linear forwards;
