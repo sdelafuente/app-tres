@@ -22,6 +22,8 @@ src/environments/environment.ts
 .versions/
 coverage/
 www/
+src/environments/
+dist/
 node_modules/
 tmp/
 temp/
