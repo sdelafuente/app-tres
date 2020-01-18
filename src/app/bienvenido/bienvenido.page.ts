@@ -9,6 +9,10 @@ import { Flashlight } from '@ionic-native/flashlight/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
+
+import { FCM } from '@ionic-native/fcm/ngx';
+import { Platform } from '@ionic/angular';
+
 @Component({
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.page.html',
@@ -35,6 +39,8 @@ export class BienvenidoPage implements OnInit {
     frequency: 1000
  };
 
+  pushes: any = [];
+
   constructor(
     private  router:  Router,
     public afAuth: AngularFireAuth,
@@ -43,8 +49,25 @@ export class BienvenidoPage implements OnInit {
     private deviceMotion: DeviceMotion,
     private flashlight: Flashlight,
     private vibration: Vibration,
-    private nativeAudio: NativeAudio
-  ) { }
+    private nativeAudio: NativeAudio,
+    private fcm: FCM, public plt: Platform
+  ) {
+    this.plt.ready()
+      .then(() => {
+        this.fcm.onNotification().subscribe(data => {
+          if (data.wasTapped) {
+            console.log("Received in background");
+          } else {
+            console.log("Received in foreground");
+          }
+        });
+
+        this.fcm.onTokenRefresh().subscribe(token => {
+          // Register your new token in your back-end if you want
+          // backend.registerToken(token);
+        });
+      });
+  }
 
   ngOnInit() {
     this.isVertial = false;
@@ -53,6 +76,19 @@ export class BienvenidoPage implements OnInit {
     this.isRight = false;
     this.isOn = false;
     this.cargarAudios();
+  }
+
+  subscribeToTopic() {
+    this.fcm.subscribeToTopic('enappd');
+  }
+  getToken() {
+    this.fcm.getToken().then(token => {
+      // Register your new token in your back-end if you want
+      // backend.registerToken(token);
+    });
+  }
+  unsubscribeFromTopic() {
+    this.fcm.unsubscribeFromTopic('enappd');
   }
 
   // Giroscopio

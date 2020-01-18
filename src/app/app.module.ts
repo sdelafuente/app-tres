@@ -22,6 +22,8 @@ import { Flashlight } from '@ionic-native/flashlight/ngx';
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -43,7 +45,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     DeviceMotion,
     Flashlight,
     Vibration,
-    NativeAudio
+    NativeAudio,
+    FCM
   ],
   bootstrap: [AppComponent]
 })
